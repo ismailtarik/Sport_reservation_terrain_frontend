@@ -1,15 +1,13 @@
+import CentreList from "./CentreList";
+
 export default function Centre() {
   return (
-  <div>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
-    <h1>Page centre</h1>
+  <div className="main">
+    <h1>Centre Managment</h1>
+    <CentreList/>
+
   </div>
   );
 }
+
+
