@@ -7,6 +7,7 @@ import {
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
+  MdCalendarToday,
 } from 'react-icons/md';
 
 // Admin Imports
@@ -68,6 +69,13 @@ const routes = [
     layout: '/auth',
     path: '/sign-in',
     icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
+    component: <SignInCentered />,
+  },
+  {
+    name: 'Reservation',
+    layout: '/public',
+    path: '/reservation',
+    icon:  <Icon as={MdCalendarToday} width="20px" height="20px" color="inherit" />,
     component: <SignInCentered />,
   },
 ];
