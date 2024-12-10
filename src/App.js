@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import initialTheme from './theme/theme'; //  { themeGreen }
 import { useState } from 'react';
 import Reservation from "./views/public/reservation";
+import UpdateReservation from 'views/admin/reservations/UpdateReservation';
 // Chakra imports
 
 export default function Main() {
@@ -22,7 +23,10 @@ export default function Main() {
             <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
           }
         />
-        <Route path="/reservation" element={ <Reservation /> } />
+          <Route path="/admin/reservations/update/:id" element={<UpdateReservation />} />
+
+          <Route path="/reservation" element={ <Reservation /> } />
+
         {/*<Route path="/public/*" element={} />*/}
       </Routes>
     </ChakraProvider>

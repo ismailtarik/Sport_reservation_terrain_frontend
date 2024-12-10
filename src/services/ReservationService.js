@@ -21,7 +21,7 @@ class ReservationService {
     }
 
     updateReservation(reservation, reservationNumber) {
-        return axios.put(RESERVATION_API_BASE_URL + '/' + reservationNumber, reservation);
+        return axios.patch(RESERVATION_API_BASE_URL + '/' + reservationNumber, reservation);
     }
 
     deleteReservation(reservationNumber) {
