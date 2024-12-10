@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./PaymentStyles.css"; // Import des styles
 
-const PaymentForm = ({ reservationId, amount }) => {
+const PaymentForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -37,11 +37,6 @@ const PaymentForm = ({ reservationId, amount }) => {
       const { paymentMethod, error: stripeError } = await stripe.createPaymentMethod({
         type: "card",
         card: cardElement,
-        billing_details: {
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          address: { line1: formData.address },
-        },
       });
 
       if (stripeError) {
@@ -50,19 +45,16 @@ const PaymentForm = ({ reservationId, amount }) => {
         return;
       }
 
-      const payload = {
-        paymentMethodId: paymentMethod.id,
-        amount,
-        reservationId,
-        customerInfo: formData,
-      };
+      const payload = { paymentMethodId: paymentMethod.id, amount };
 
-      const response = await fetch("http://localhost:9091/api/payment/addCard", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+      const response = await fetch(
+        `${process.env.REACT_APP_PAYMENT_URL}/addCard`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -75,14 +67,15 @@ const PaymentForm = ({ reservationId, amount }) => {
       const data = await response.json();
 
       if (data.paymentIntentId) {
-        const confirmResponse = await fetch("http://localhost:9091/api/payment/confirmReservation", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+        const confirmResponse = await fetch(
+          `${process.env.REACT_APP_PAYMENT_URL}/addCard`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
           body: JSON.stringify({
             paymentIntentId: data.paymentIntentId,
-            reservationId: reservationId,
           }),
         });
 
@@ -96,6 +89,7 @@ const PaymentForm = ({ reservationId, amount }) => {
         setError("PaymentIntent ID is missing from the response.");
       }
     } catch (error) {
+      console.error("Unexpected Error:", error);
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsProcessing(false);
