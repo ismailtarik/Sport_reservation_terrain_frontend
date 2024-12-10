@@ -14,12 +14,14 @@ import MainDashboard from 'views/admin/default';
 import Profile from 'views/admin/profile';
 import Centre from 'views/admin/centre';
 import Terrain from 'views/admin/terrain';
-// Auth Imports
-import SignInCentered from 'views/auth/signIn';
 import AddCentre from 'views/admin/centre/AddCentre';
 import UpdateCentre from 'views/admin/centre/UpdateCentre';
 import AddTerrain from 'views/admin/terrain/AddTerrain';
 import UpdateTerrain from 'views/admin/terrain/UpdateTerrain';
+import Reservations from 'views/admin/reservations';
+import UpdateResevation from 'views/admin/reservations/UpdateReservation';
+// Auth Imports
+import SignInCentered from 'views/auth/signIn';
 
 const routes = [
   {
@@ -91,6 +93,21 @@ const routes = [
     component: <Profile />,
   },
   {
+    name: 'Reservations',
+    layout: '/admin',
+    path: '/all-reservations',
+    icon: <Icon as={MdCalendarToday} width="20px" height="20px" color="inherit" />,
+    component: <Reservations />,
+  },
+  {
+    name: 'Update reservation',
+    layout: '/admin',
+    path: '/all-reservations/update/:id',
+    component: <UpdateResevation />,
+  },
+
+
+  {
     name: 'Sign In',
     layout: '/auth',
     path: '/sign-in',
@@ -102,7 +119,7 @@ const routes = [
     layout: '/public',
     path: '/reservation',
     icon:  <Icon as={MdCalendarToday} width="20px" height="20px" color="inherit" />,
-    component: <SignInCentered />,
+
   },
 ];
 

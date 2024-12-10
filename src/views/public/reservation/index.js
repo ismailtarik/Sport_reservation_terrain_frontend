@@ -168,12 +168,3 @@ function Reservation() {
 
 export default Reservation;
 
-
-// export default function Reservation() {
-//     return (
-//         <div>
-//             <h1>im Reservation</h1>
-//
-//         </div>
-//     );
-// }
