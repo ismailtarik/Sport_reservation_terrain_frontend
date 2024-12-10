@@ -15,6 +15,9 @@ import Profile from 'views/admin/profile';
 import Centre from 'views/admin/centre';
 import Terrain from 'views/admin/terrain';
 
+// Payment imports
+import Payment from 'views/payments/Payment'
+
 // Auth Imports
 import SignInCentered from 'views/auth/signIn';
 
@@ -69,6 +72,13 @@ const routes = [
     path: '/sign-in',
     icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
     component: <SignInCentered />,
+  },
+  {
+    name: 'Payment',
+    layout: '/payment',
+    path: '/payment',
+    icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
+    component: <Payment />,
   },
 ];
 

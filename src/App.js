@@ -10,6 +10,8 @@ import {
 import initialTheme from './theme/theme'; //  { themeGreen }
 import { useState } from 'react';
 // Chakra imports
+import Payment from './views/payments/Payment';
+
 
 export default function Main() {
   // eslint-disable-next-line
@@ -25,6 +27,7 @@ export default function Main() {
           }
         />
         <Route path="/" element={<Navigate to="/admin" replace />} />
+        <Route path="/payments" element={<Payment />} />
       </Routes>
     </ChakraProvider>
   );
