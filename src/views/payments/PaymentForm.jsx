@@ -45,7 +45,7 @@ const PaymentForm = () => {
         return;
       }
 
-      const payload = { paymentMethodId: paymentMethod.id, amount };
+      const payload = { paymentMethodId: paymentMethod.id };
 
       const response = await fetch(
         `${process.env.REACT_APP_PAYMENT_URL}/addCard`,
