@@ -3,12 +3,11 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import {} from 'react-router-dom';
 import AuthLayout from './layouts/auth';
 import AdminLayout from './layouts/admin';
-import {
-  ChakraProvider,
-  // extendTheme
-} from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import initialTheme from './theme/theme'; //  { themeGreen }
 import { useState } from 'react';
+import Reservation from "./views/public/reservation";
+import UpdateReservation from 'views/admin/reservations/UpdateReservation';
 // Chakra imports
 import Payment from './views/payments/Payment';
 
@@ -27,7 +26,14 @@ export default function Main() {
           }
         />
         <Route path="/" element={<Navigate to="/admin" replace />} />
+        
         <Route path="/payments" element={<Payment />} />
+
+          <Route path="/admin/reservations/update/:id" element={<UpdateReservation />} />
+
+          <Route path="/reservation" element={ <Reservation /> } />
+
+        {/*<Route path="/public/*" element={} />*/}
       </Routes>
     </ChakraProvider>
   );

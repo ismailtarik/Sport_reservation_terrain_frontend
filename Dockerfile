@@ -16,5 +16,5 @@ COPY . .
 # Exposer le port utilisé par l'application (par défaut 3000 pour React)
 EXPOSE 3000
 
-# Lancer le serveur de développement React
+# Start development server
 CMD ["npm", "start"]
