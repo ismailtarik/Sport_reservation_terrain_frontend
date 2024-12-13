@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddCentre = () => {
   const [centreData, setCentreData] = useState({
@@ -8,26 +10,36 @@ const AddCentre = () => {
   });
 
   const timeSlots = [
-    '8am-10am',
-    '10am-12pm',
-    '12pm-2pm',
+    '8am-20am',
+    '10am-20am',
+    '12am-20am',
     '2pm-4pm',
     '4pm-6pm',
     '6pm-8pm',
   ];
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCentreData({ ...centreData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submission and make the POST request
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    alert(`Centre Data Entered:
-      Nom: ${centreData.nom}
-      Adresse: ${centreData.adresse}
-      Horaires: ${centreData.horaires}`);
+    try {
+      const response = await axios.post('http://localhost:8085/api/centres', centreData);
+      if (response.status === 201) {
+        alert('Centre added successfully!');
+        // Optionally, navigate or reset form after successful submission
+        navigate('/admin/centre-page');
+      }
+    } catch (error) {
+      console.error('Error adding centre:', error);
+      alert('Failed to add centre. Please try again.');
+    }
   };
 
   return (
@@ -79,7 +91,15 @@ const AddCentre = () => {
         <button type="submit" className="submit-btn">
           Add Centre
         </button>
-        <button type="submit"  className="submit-btn">
+
+        <button
+          type="button"
+          className="btn cancel-btn"
+          onClick={() => {
+            setCentreData({ nom: '', adresse: '', horaires: '' });
+            // Optionally, navigate away or reset form
+          }}
+        >
           Cancel
         </button>
       </form>
