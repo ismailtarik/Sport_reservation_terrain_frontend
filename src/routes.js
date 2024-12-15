@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Hide, Icon, layout } from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/react';
 import {
+  MdBarChart,
   MdPerson,
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
-  MdCalendarToday,
 } from 'react-icons/md';
 
 // Admin Imports
@@ -14,12 +14,10 @@ import MainDashboard from 'views/admin/default';
 import Profile from 'views/admin/profile';
 import Centre from 'views/admin/centre';
 import Terrain from 'views/admin/terrain';
-import AddCentre from 'views/admin/centre/AddCentre';
-import UpdateCentre from 'views/admin/centre/UpdateCentre';
-import AddTerrain from 'views/admin/terrain/AddTerrain';
-import UpdateTerrain from 'views/admin/terrain/UpdateTerrain';
-import Reservations from 'views/admin/reservations';
-import UpdateResevation from 'views/admin/reservations/UpdateReservation';
+
+// Payment imports
+import Payment from 'views/payments/Payment'
+
 // Auth Imports
 import SignInCentered from 'views/auth/signIn';
 
@@ -30,30 +28,6 @@ const routes = [
     path: '/default',
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     component: <MainDashboard />,
-  },
-  {
-    name: 'Add New Centre',
-    layout: '/admin',
-    path: '/centre-page/addNew',
-    component: <AddCentre />,
-  },
-  {
-    name: 'Update Centre',
-    layout: '/admin', 
-    path: '/centre-page/update/:id',
-    component: <UpdateCentre />,
-  },
-  {
-    name: 'Add New Terrain',
-    layout: '/admin',
-    path: '/terrain-page/addNew',
-    component: <AddTerrain />,
-  },
-  {
-    name: 'Update Terrain',
-    layout: '/admin',
-    path: '/terrain-page/update/:id',
-    component: <UpdateTerrain />,
   },
   {
     name: 'Terrain Page',
@@ -80,7 +54,7 @@ const routes = [
         width="20px"
         height="20px"
         color="inherit"
-      />  
+      />
     ),
     component: <Centre />,
     secondary: true,
@@ -93,21 +67,6 @@ const routes = [
     component: <Profile />,
   },
   {
-    name: 'Reservations',
-    layout: '/admin',
-    path: '/all-reservations',
-    icon: <Icon as={MdCalendarToday} width="20px" height="20px" color="inherit" />,
-    component: <Reservations />,
-  },
-  {
-    name: 'Update reservation',
-    layout: '/admin',
-    path: '/all-reservations/update/:id',
-    component: <UpdateResevation />,
-  },
-
-
-  {
     name: 'Sign In',
     layout: '/auth',
     path: '/sign-in',
@@ -115,11 +74,11 @@ const routes = [
     component: <SignInCentered />,
   },
   {
-    name: 'Reservation',
-    layout: '/public',
-    path: '/reservation',
-    icon:  <Icon as={MdCalendarToday} width="20px" height="20px" color="inherit" />,
-
+    name: 'Payment',
+    layout: '/payment',
+    path: '/payment',
+    icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
+    component: <Payment />,
   },
 ];
 

@@ -1,12 +1,20 @@
-FROM node:18-alpine
+
+# Utiliser une image Node.js pour construire et exécuter l'application
+FROM node:18
+
+# Définir le répertoire de travail dans le container
 WORKDIR /app
-# Copy package files
+
+# Copier les fichiers package.json et package-lock.json dans le container
 COPY package*.json ./
-# Install dependencies
+
+# Installer les dépendances
 RUN npm install
-# Copy project files
+
+# Copier tous les fichiers de l'application dans le container
 COPY . .
-# Expose port 3000 (default React dev server port)
+
+# Exposer le port utilisé par l'application (par défaut 3000 pour React)
 EXPOSE 3000
 # Start development server
 CMD ["npm", "start"]

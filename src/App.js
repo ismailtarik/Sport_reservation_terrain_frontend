@@ -9,6 +9,8 @@ import { useState } from 'react';
 import Reservation from "./views/public/reservation";
 import UpdateReservation from 'views/admin/reservations/UpdateReservation';
 // Chakra imports
+import Payment from './views/payments/Payment';
+
 
 export default function Main() {
   // eslint-disable-next-line
@@ -23,6 +25,10 @@ export default function Main() {
             <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
           }
         />
+        <Route path="/" element={<Navigate to="/admin" replace />} />
+        
+        <Route path="/payments" element={<Payment />} />
+
           <Route path="/admin/reservations/update/:id" element={<UpdateReservation />} />
 
           <Route path="/reservation" element={ <Reservation /> } />
