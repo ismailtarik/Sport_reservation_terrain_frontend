@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './terrain.css'; // Include styling as needed
+import './terrain.css';
 
 const AddTerrain = () => {
   const navigate = useNavigate();
-
-  // State for terrain fields
   const [formData, setFormData] = useState({
     nom: '',
     type: '',
     prix: '',
     disponible: false,
+    centreId: '',  // Added field for the selected centre ID
   });
 
-  // Handle field changes
+  const [centers, setCenters] = useState([]);
+
+  // Fetch the list of centers when the component mounts
+  useEffect(() => {
+    axios
+      .get('http://localhost:8085/api/centres')
+      .then((response) => {
+        setCenters(response.data);  // Assuming the response contains the list of centers
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error('Error fetching centers:', error);
+        alert('Failed to fetch centers.');
+      });
+  }, []);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -22,16 +37,25 @@ const AddTerrain = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Terrain Data:
-      Name: ${formData.nom}
-      Type: ${formData.type}
-      Price: ${formData.prix}
-      Available: ${formData.disponible ? 'Yes' : 'No'}
-    `);
-    navigate('/terrain-page'); // Navigate back to the terrain list after submission
+
+    // Add the centreId to the form data before posting
+    const terrainData = {
+      ...formData,
+      centreId: formData.centreId,  // Include selected centreId
+    };
+
+    axios
+      .post('http://localhost:8084/api/terrains', terrainData)
+      .then(() => {
+        alert('Terrain added successfully!');
+        navigate('/admin/terrain-page');
+      })
+      .catch((error) => {
+        console.error('Error adding terrain:', error);
+        alert('Failed to add terrain.');
+      });
   };
 
   return (
@@ -90,6 +114,24 @@ const AddTerrain = () => {
             />
             Available for Reservation
           </label>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="centreId">Center:</label>
+          <select
+            id="centreId"
+            name="centreId"
+            value={formData.centreId}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Center</option>
+            {centers.map((centre) => (
+              <option key={centre.id} value={centre.id}>
+                {centre.nom} {/* Assuming `centre.nom` is the name of the center */}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-actions">

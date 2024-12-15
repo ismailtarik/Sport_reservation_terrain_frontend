@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const UpdateCentre = () => {
   const { id } = useParams(); // Assuming you're using React Router and the center's ID is passed in the URL
@@ -18,38 +19,45 @@ const UpdateCentre = () => {
     '6pm-8pm',
   ];
 
-  useEffect(() => {
-    // Simulating fetching data for the given ID
-    const fetchCentreData = async () => {
-      // Replace with API call or logic to get center details by ID
-      const fakeData = {
-        id: 1,
-        nom: 'Centre Example',
-        adresse: 'Example Address',
-        horaires: '10am-12pm',
-      };
+  // Static API URL
+  const API_URL = `http://localhost:8085/api/centres/${id}`; // This URL will fetch or update the specific centre by ID
 
-      if (parseInt(id, 10) === fakeData.id) {
-        setCentreData(fakeData);
+  // Fetch centre data based on the ID
+  useEffect(() => {
+    const fetchCentreData = async () => {
+      try {
+        const response = await axios.get(API_URL); // Fetch centre details by ID
+        setCentreData(response.data); // Assuming the backend returns { id, nom, adresse, horaires }
+      } catch (error) {
+        console.error('Error fetching centre data:', error);
+        alert('Error fetching centre data.');
       }
     };
 
     fetchCentreData();
   }, [id]);
-  
+
+  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCentreData({ ...centreData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  // Submit updated data to the backend
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Dispconst navigate = useNavigate();laying updated data as alert for testing purposes
-    alert(`Updated Centre Data:
-      Nom: ${centreData.nom}
-      Adresse: ${centreData.adresse}
-      Horaires: ${centreData.horaires}`);
-    // Replace this alert with API call or logic to save updated data
+    try {
+      const response = await axios.put(API_URL, centreData); // Send PUT request with updated data
+      if (response.status === 200) {
+        alert('Centre updated successfully!');
+        navigate('/admin/centre-page'); // Redirect after successful update
+      } else {
+        alert('Failed to update centre. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error updating centre data:', error);
+      alert('Error updating centre data.');
+    }
   };
 
   return (
@@ -109,8 +117,6 @@ const UpdateCentre = () => {
           >
             Cancel
           </button>
-
-
       </form>
     </div>
   );

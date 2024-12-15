@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Set base URL for your API (update this URL with your backend's URL)
 const API_URL = 'http://localhost:5000/api';  // Change this to your actual API URL
-
+const CENTRE_API_URL = "http://localhost:5000/api";
 // Set up Axios instance with default configurations
 const api = axios.create({
   baseURL: API_URL,
@@ -21,6 +21,7 @@ export const getCentres = async () => {
     throw error;
   }
 };
+
 
 export const getCentreById = async (id) => {
   try {

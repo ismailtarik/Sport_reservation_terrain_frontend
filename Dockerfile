@@ -1,3 +1,4 @@
+
 # Utiliser une image Node.js pour construire et exécuter l'application
 FROM node:18
 
@@ -15,6 +16,6 @@ COPY . .
 
 # Exposer le port utilisé par l'application (par défaut 3000 pour React)
 EXPOSE 3000
-
 # Start development server
 CMD ["npm", "start"]
+
