@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Mappe le port 3000 du container au port 3000 de l'hôte
+    networks:
+      - app-network
+    volumes:
+      - .:/app  # Synchroniser les fichiers locaux avec le container
+      - /app/node_modules  # Ignorer les modules node locaux
+    stdin_open: true  # Maintenir le terminal ouvert pour le débogage
+    tty: true         # Supporter un terminal interactif
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Pour surveiller les changements dans les fichiers si nécessaire
+      - REACT_APP_PAYMENT_URL=http://paiment-service:9091/api/payment
+      - REACT_APP_AUTH_URL=http://service-auth:9090
+
+networks:
+  app-network:
+    driver: bridge
