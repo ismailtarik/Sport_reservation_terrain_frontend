@@ -8,6 +8,3 @@ export default function Terrain() {
     </div>
   );
 }
-
-
-
