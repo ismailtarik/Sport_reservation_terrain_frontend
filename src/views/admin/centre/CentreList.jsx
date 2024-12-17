@@ -19,7 +19,7 @@ const CentreList = () => {
   useEffect(() => {
     const fetchCentres = async () => {
       try {
-        const response = await axios.get('http://localhost:8085/api/centres');
+        const response = await axios.get('http://localhost:8088/api/centres');
         console.log(response.data);
         setCentres(response.data); // Assuming the API returns an array of centres
       } catch (err) {
@@ -49,7 +49,7 @@ const CentreList = () => {
     // Proceed with deletion if no terrain is assigned
     if (window.confirm('Are you sure you want to delete this centre?')) {
       try {
-        await axios.delete(`http://localhost:8085/api/centres/${id}`);
+        await axios.delete(`http://localhost:8088/api/centres/${id}`);
         setCentres((prev) => prev.filter((centre) => centre.id !== id));
         alert(`Centre with ID ${id} deleted successfully.`);
       } catch (err) {

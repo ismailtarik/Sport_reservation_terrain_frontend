@@ -30,7 +30,7 @@ const AddCentre = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8085/api/centres', centreData);
+      const response = await axios.post('http://localhost:8088/api/centres', centreData);
       if (response.status === 201) {
         alert('Centre added successfully!');
         // Optionally, navigate or reset form after successful submission

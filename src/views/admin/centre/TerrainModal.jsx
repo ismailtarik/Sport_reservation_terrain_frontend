@@ -9,7 +9,7 @@ const Modal = ({ centre, closeModal }) => {
     // Fetch all terrains using Axios
     const fetchTerrains = async () => {
       try {
-        const response = await axios.get('http://localhost:8084/api/terrains'); // Updated URL
+        const response = await axios.get('http://localhost:8088/api/terrains'); // Updated URL
         const allTerrains = response.data;
 
         // Filter the terrains based on the centreId

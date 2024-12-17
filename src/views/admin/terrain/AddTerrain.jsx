@@ -18,7 +18,7 @@ const AddTerrain = () => {
   // Fetch the list of centers when the component mounts
   useEffect(() => {
     axios
-      .get('http://localhost:8085/api/centres')
+      .get('http://localhost:8088/api/centres')
       .then((response) => {
         setCenters(response.data);  // Assuming the response contains the list of centers
         console.log(response.data)
@@ -47,7 +47,7 @@ const AddTerrain = () => {
     };
 
     axios
-      .post('http://localhost:8084/api/terrains', terrainData)
+      .post('http://localhost:8088/api/terrains', terrainData)
       .then(() => {
         alert('Terrain added successfully!');
         navigate('/admin/terrain-page');
