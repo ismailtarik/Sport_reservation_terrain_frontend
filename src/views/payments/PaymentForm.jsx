@@ -68,7 +68,7 @@ const PaymentForm = () => {
 
       if (data.paymentIntentId) {
         const confirmResponse = await fetch(
-          `${process.env.REACT_APP_PAYMENT_URL}/addCard`,
+          `${process.env.REACT_APP_PAYMENT_URL}/confirmReservation`,
           {
             method: "POST",
             headers: {
