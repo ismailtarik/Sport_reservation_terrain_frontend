@@ -20,7 +20,7 @@ const UpdateCentre = () => {
   ];
 
   // Static API URL
-  const API_URL = `http://localhost:8085/api/centres/${id}`; // This URL will fetch or update the specific centre by ID
+  const API_URL = `http://localhost:8088/api/centres/${id}`; // This URL will fetch or update the specific centre by ID
 
   // Fetch centre data based on the ID
   useEffect(() => {

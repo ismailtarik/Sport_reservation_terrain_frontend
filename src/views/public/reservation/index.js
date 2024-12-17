@@ -109,7 +109,7 @@ function Reservation() {
 
         fetchReservations();
     }, []);
-
+        
     const generateTimeSlots = (start, end) => {
         const slots = [];
         let current = moment(start, 'HH:mm');
