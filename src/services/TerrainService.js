@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const TERRAIN_API_BASE_URL = "http://localhost:8084/api/terrains";
+// const TERRAIN_API_BASE_URL = "http://localhost:8084/api/terrains";
+const TERRAIN_API_BASE_URL = process.env.REACT_APP_TERRAIN_API_URL;
 
 class TerrainService {
     getTerrains() {

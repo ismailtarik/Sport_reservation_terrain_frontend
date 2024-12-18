@@ -15,7 +15,10 @@ services:
     tty: true         # Supporter un terminal interactif
     environment:
       - CHOKIDAR_USEPOLLING=true  # Pour surveiller les changements dans les fichiers si nécessaire
-      - REACT_APP_PAYMENT_URL=http://paiment-service:9091/api/payment
+      - REACT_APP_PAYMENT_URL=http://localhost:9091/api/payment
+      - REACT_APP_RESERVATION_API_URL=http://localhost:8086/api/reservations
+      - REACT_APP_CENTRE_API_URL=http://localhost:8085/api/centres
+      - REACT_APP_TERRAIN_API_URL=http://localhost:8084/api/terrains
       - REACT_APP_AUTH_URL=http://service-auth:9090
 
 networks:

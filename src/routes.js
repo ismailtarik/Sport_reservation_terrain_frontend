@@ -22,13 +22,13 @@ import Payment from 'views/payments/Payment'
 import SignInCentered from 'views/auth/signIn';
 
 const routes = [
-  {
-    name: 'Main Dashboard',
-    layout: '/admin',
-    path: '/default',
-    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
-    component: <MainDashboard />,
-  },
+  // {
+  //   name: 'Main Dashboard',
+  //   layout: '/admin',
+  //   path: '/default',
+  //   icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+  //   component: <MainDashboard />,
+  // },
   {
     name: 'Terrain Page',
     layout: '/admin',
@@ -59,13 +59,13 @@ const routes = [
     component: <Centre />,
     secondary: true,
   },
-  {
-    name: 'Profile',
-    layout: '/admin',
-    path: '/profile',
-    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
-    component: <Profile />,
-  },
+  // {
+  //   name: 'Profile',
+  //   layout: '/admin',
+  //   path: '/profile',
+  //   icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+  //   component: <Profile />,
+  // },
   {
     name: 'Sign In',
     layout: '/auth',
