@@ -57,6 +57,7 @@ const PaymentForm = ({ reservationData }) => {
       const response = await PaymentService.addCard(payload);
 
 
+
       console.log("response:", response);
 
     if (response.paymentIntentId) {

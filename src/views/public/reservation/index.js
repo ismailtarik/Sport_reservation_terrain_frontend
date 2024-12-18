@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
@@ -109,7 +110,7 @@ function Reservation() {
 
         fetchReservations();
     }, []);
-
+        
     const generateTimeSlots = (start, end) => {
         const slots = [];
         let current = moment(start, 'HH:mm');
@@ -347,4 +348,3 @@ function Reservation() {
 }
 
 export default Reservation;
-

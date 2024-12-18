@@ -30,7 +30,7 @@ function AuthIllustration(props) {
         justifyContent='start'
         direction='column'>
         <NavLink
-          to='/admin'
+          to='/reservation'
           style={() => ({
             width: "fit-content",
             marginTop: "40px",

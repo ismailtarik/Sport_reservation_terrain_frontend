@@ -12,7 +12,7 @@ const TerrainList = () => {
      // Fetch terrains from the API using axios
      const fetchTerrains = async () => {
       try {
-        const response = await axios.get('http://localhost:8084/api/terrains');
+        const response = await axios.get('http://localhost:8088/api/terrains');
         setTerrains(response.data); // Set the fetched data to the state
         console.log(response.data)
       } catch (error) {
@@ -31,7 +31,7 @@ const TerrainList = () => {
 
   const handleDelete = (id) => {
     if (window.confirm(`Are you sure you want to delete the terrain with ID ${id}?`)) {
-      fetch(`http://localhost:8084/api/terrains/${id}`, {
+      fetch(`http://localhost:8088/api/terrains/${id}`, {
         method: 'DELETE',
       })
         .then((response) => {

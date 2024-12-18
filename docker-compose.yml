@@ -19,7 +19,7 @@ services:
       - REACT_APP_RESERVATION_API_URL=http://localhost:8086/api/reservations
       - REACT_APP_CENTRE_API_URL=http://localhost:8085/api/centres
       - REACT_APP_TERRAIN_API_URL=http://localhost:8084/api/terrains
-      - REACT_APP_AUTH_URL=http://service-auth:9090
+      - REACT_APP_AUTH_URL=http://localhost:9090
 
 networks:
   app-network:

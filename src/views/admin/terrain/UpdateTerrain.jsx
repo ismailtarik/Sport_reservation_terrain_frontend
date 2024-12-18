@@ -27,7 +27,7 @@ const UpdateTerrain = () => {
   useEffect(() => {
     // Fetch terrain data
     axios
-      .get(`http://localhost:8084/api/terrains/${id}`)
+      .get(`http://localhost:8088/api/terrains/${id}`)
       .then((response) => {
         setFormData({
           nom: response.data.nom,
@@ -45,7 +45,7 @@ const UpdateTerrain = () => {
 
     // Fetch centers list
     axios
-      .get('http://localhost:8085/api/centres') // Assuming this is the endpoint for the centers list
+      .get('http://localhost:8088/api/centres') // Assuming this is the endpoint for the centers list
       .then((response) => {
         console.log(response.data); // Log the data to inspect it
         if (Array.isArray(response.data)) {
@@ -73,7 +73,7 @@ const UpdateTerrain = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:8084/api/terrains/${id}`, formData)
+      .put(`http://localhost:8088/api/terrains/${id}`, formData)
       .then(() => {
         alert('Terrain updated successfully!');
         navigate('/admin/terrain-page'); // Navigate back to terrain list
