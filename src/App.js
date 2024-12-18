@@ -8,6 +8,9 @@ import { useState } from 'react';
 import Reservation from './views/public/reservation';
 import UpdateReservation from 'views/admin/reservations/UpdateReservation';
 import Payment from './views/payments/Payment';
+
+
+import Home from "./views/public/home";
 import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
 
 export default function Main() {
@@ -16,8 +19,12 @@ export default function Main() {
   return (
     <ChakraProvider theme={currentTheme}>
       <Routes>
+
+        <Route path="/home" element={ <Home /> } />
+
         {/* Public Routes */}
         <Route path="/reservation" element={<Reservation />} />
+
         <Route path="auth/*" element={<AuthLayout />} />
         <Route
           path="/payments"
@@ -25,6 +32,11 @@ export default function Main() {
               <Payment />
           }
         />
+
+        <Route path="/" element={<Navigate to="/home" replace />} />
+         
+
+
 
         {/* Protected Routes */}
         <Route

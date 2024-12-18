@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const RESERVATION_API_BASE_URL = "http://localhost:8086/api/reservations";
+// const RESERVATION_API_BASE_URL = "http://localhost:8086/api/reservations";
+const RESERVATION_API_BASE_URL = process.env.REACT_APP_RESERVATION_API_URL;
+
 
 class ReservationService {
     getReservations() {
@@ -56,6 +58,7 @@ class ReservationService {
                 return Promise.reject(error);
             });
     }
+
 }
 
 export default new ReservationService();

@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import "./PaymentStyles.css"; // Import des styles
+import { useNavigate } from "react-router-dom";
+import "./PaymentStyles.css";
+import ReservationService from "../../services/ReservationService"; // Import des styles
+import PaymentService from "../../services/PaymentService";
 
-const PaymentForm = () => {
+const PaymentForm = ({ reservationData }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     address: "",
   });
+
+  const navigate = useNavigate();
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
@@ -45,44 +51,36 @@ const PaymentForm = () => {
         return;
       }
 
-      const payload = { paymentMethodId: paymentMethod.id };
+        const payload = { paymentMethodId: paymentMethod.id };
 
-      const response = await fetch(
-        `${process.env.REACT_APP_PAYMENT_URL}/addCard`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-      });
+        // Add card using PaymentService
+      const response = await PaymentService.addCard(payload);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(`Error: ${errorData.error} - ${errorData.message}`);
-        setIsProcessing(false);
-        return;
-      }
 
-      const data = await response.json();
 
-      if (data.paymentIntentId) {
-        const confirmResponse = await fetch(
-          `${process.env.REACT_APP_PAYMENT_URL}/confirmReservation`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          body: JSON.stringify({
-            paymentIntentId: data.paymentIntentId,
-          }),
-        });
+      console.log("response:", response);
 
-        if (confirmResponse.ok) {
-          setPaymentSucceeded(true);
+    if (response.paymentIntentId) {
+            // Confirm payment intent
+            const confirmResponse = await PaymentService.confirmPayment({
+                paymentIntentId: response.paymentIntentId,
+            });
+
+        if (confirmResponse) {
+
+            // Call ReservationService to save the reservation
+            try {
+                await ReservationService.createReservation(reservationData);
+                setPaymentSucceeded(true);
+                // Redirect to the home page
+                navigate("/home");
+
+            } catch (reservationError) {
+                console.error("Reservation Error:", reservationError);
+                setError("Payment succeeded, but reservation creation failed.");
+            }
         } else {
-          const confirmErrorData = await confirmResponse.json();
+          const confirmErrorData = await response;
           setError(`Error confirming reservation: ${confirmErrorData.message || confirmErrorData.error}`);
         }
       } else {

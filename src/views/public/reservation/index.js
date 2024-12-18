@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 // Chakra imports
 import {
@@ -49,6 +49,8 @@ function Reservation() {
     const [timeSlots, setTimeSlots] = useState([]);
     const [reservedTimeSlots, setReservedTimeSlots] = useState([]);
 
+    let navigate = useNavigate();
+
     // Fetch centers on component mount
     useEffect(() => {
         const fetchCentres = async () => {
@@ -87,7 +89,6 @@ function Reservation() {
             }
         };
 
-
         fetchTerrains();
     }, [selectedCentre]);
 
@@ -106,7 +107,6 @@ function Reservation() {
                 console.error("Failed to fetch reservations:", err);
             }
         };
-
 
         fetchReservations();
     }, []);
@@ -129,7 +129,7 @@ function Reservation() {
         setReservationDate(date);
 
         if (selectedCentre && centres[selectedCentre]?.horaires) {
-            const [startTime, endTime] = centres[selectedCentre].horaires.split(','); // Extract start and end times
+            const [startTime, endTime] = centres[selectedCentre].horaires.split('-'); // Extract start and end times
             setTimeSlots(generateTimeSlots(startTime, endTime));
         } else {
             console.error("Horaires not available for the selected centre.");
@@ -155,28 +155,36 @@ function Reservation() {
         setError("");
         setSuccess("");
 
-        // Debugging: Log form data
-        console.log("Form Data Submitted:", {
+        const reservationData = {
             terrainId: selectedTerrain,
             reservedBy,
             reservationDate,
             phoneNumber,
-        });
+        };
+        console.log("Form Data Submitted:", reservationData);
 
         try {
-            await ReservationService.createReservation({
-                terrainId: selectedTerrain,
-                reservedBy,
-                reservationDate,
-                phoneNumber,
-            });
-            setSuccess("Reservation created successfully!");
+            // Optional: Validate reservation data here before proceeding to payment
+            if (!selectedTerrain || !reservedBy || !reservationDate || !phoneNumber) {
+                setError("All fields are required.");
+                return;
+            }
+            // await ReservationService.createReservation({
+            //     terrainId: selectedTerrain,
+            //     reservedBy,
+            //     reservationDate,
+            //     phoneNumber,
+            // });
+            setSuccess("Reservation form completed !");
             setSelectedCentre("");
             setSelectedTerrain("");
             setTerrainId("");
             setReservedBy("");
             setReservationDate("");
             setPhoneNumber("");
+
+            // Navigate to payment page with reservation data
+            navigate("/payments", { state: reservationData });
         } catch (err) {
             console.error("API Error:", err);
             setError(
@@ -329,7 +337,7 @@ function Reservation() {
                         mb="24px"
                         type="submit"
                     >
-                        Create Reservation
+                        move to payment
                     </Button>
                 </FormControl>
                 {error && <Text color="red.500" mt="2">{error}</Text>}
