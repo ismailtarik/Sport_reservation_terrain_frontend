@@ -10,8 +10,14 @@ import UpdateReservation from 'views/admin/reservations/UpdateReservation';
 import Payment from './views/payments/Payment';
 
 
+import AddCentre from './views/admin/centre/AddCentre';
+import UpdateCentre from './views/admin/centre/UpdateCentre';
+import AddTerrain from './views/admin/terrain/AddTerrain';
+
+
 import Home from "./views/public/home";
-import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
+import ProtectedRoute from './components/ProtectedRoute';
+import UpdateTerrain from "./views/admin/terrain/UpdateTerrain"; // Import the ProtectedRoute component
 
 export default function Main() {
   const [currentTheme, setCurrentTheme] = useState(initialTheme);
@@ -40,23 +46,55 @@ export default function Main() {
 
         {/* Protected Routes */}
         <Route
-          path="admin/*"
+          path="/admin/*"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
          <Route
-          path="/admin/reservations/update/:id"
+          path="/admin/all-reservations/update/:id"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <UpdateReservation />
-            </ProtectedRoute>
+            // </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/admin/centre-page/addNew"
+          element={
+            // <ProtectedRoute>
+              <AddCentre />
+            // </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/admin/centre-page/update/:id"
+          element={
+            // <ProtectedRoute>
+              <UpdateCentre />
+            // </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/admin/terrain-page/addNew"
+          element={
+            // <ProtectedRoute>
+              <AddTerrain />
+            // </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/admin/terrain-page/update/:id"
+          element={
+            // <ProtectedRoute>
+              <UpdateTerrain />
+            // </ProtectedRoute>
           }
         />
         {/* Redirect Root */}
-        <Route path="/admin" element={<Navigate to="/admin" replace />} />
+        <Route path="/admin/*" element={<Navigate to="/admin/centre-page" replace />} />
       </Routes>
     </ChakraProvider>
   );

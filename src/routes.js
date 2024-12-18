@@ -7,6 +7,7 @@ import {
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
+  MdCalendarToday
 } from 'react-icons/md';
 
 import AddCentre from 'views/admin/centre/AddCentre';
@@ -36,30 +37,30 @@ const routes = [
   //   icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
   //   component: <MainDashboard />,
   // },
-  {
-    name: 'Add New Centre',
-    layout: '/admin',
-    path: '/centre-page/addNew',
-    component: <AddCentre />,
-  },
-  {
-    name: 'Update Centre',
-    layout: '/admin', 
-    path: '/centre-page/update/:id',
-    component: <UpdateCentre />,
-  },
-  {
-    name: 'Add New Terrain',
-    layout: '/admin',
-    path: '/terrain-page/addNew',
-    component: <AddTerrain />,
-  },
-  {
-    name: 'Update Terrain',
-    layout: '/admin',
-    path: '/terrain-page/update/:id',
-    component: <UpdateTerrain />,
-  },
+  // {
+  //   name: 'Add New Centre',
+  //   layout: '/admin',
+  //   path: '/centre-page/addNew',
+  //   component: <AddCentre />,
+  // },
+  // {
+  //   name: 'Update Centre',
+  //   layout: '/admin',
+  //   path: '/centre-page/update/:id',
+  //   component: <UpdateCentre />,
+  // },
+  // {
+  //   name: 'Add New Terrain',
+  //   layout: '/admin',
+  //   path: '/terrain-page/addNew',
+  //   component: <AddTerrain />,
+  // },
+  // {
+  //   name: 'Update Terrain',
+  //   layout: '/admin',
+  //   path: '/terrain-page/update/:id',
+  //   component: <UpdateTerrain />,
+  // },
   {
     name: 'Terrain Page',
     layout: '/admin',
@@ -111,6 +112,19 @@ const routes = [
     icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
     component: <Payment />,
   },
+  {
+    name: 'Reservations',
+    layout: '/admin',
+    path: '/all-reservations',
+    icon: <Icon as={MdCalendarToday} width="20px" height="20px" color="inherit" />,
+    component: <Reservations />,
+  },
+  // {
+  //   name: 'Update reservation',
+  //   layout: '/admin',
+  //   path: '/all-reservations/update/:id',
+  //   component: <UpdateResevation />,
+  // },
 ];
 
 export default routes;
