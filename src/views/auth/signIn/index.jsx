@@ -52,7 +52,7 @@ function SignIn() {
       localStorage.setItem("token", response.data.token);
       setSuccess("Connexion réussie !");
 
-      setTimeout(() => navigate("/admin"), 1000);
+      setTimeout(() => navigate("/admin/centre-page"), 1000);
     } catch (err) {
       if (err.response) {
         setError(err.response?.data?.message || "username ou mot de passe incorrect.");
