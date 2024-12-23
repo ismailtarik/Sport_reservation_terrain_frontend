@@ -48,49 +48,49 @@ export default function Main() {
         <Route
           path="/admin/*"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
          <Route
           path="/admin/all-reservations/update/:id"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <UpdateReservation />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
           <Route
           path="/admin/centre-page/addNew"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <AddCentre />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
           <Route
           path="/admin/centre-page/update/:id"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <UpdateCentre />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
           <Route
           path="/admin/terrain-page/addNew"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <AddTerrain />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
           <Route
           path="/admin/terrain-page/update/:id"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <UpdateTerrain />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
         {/* Redirect Root */}

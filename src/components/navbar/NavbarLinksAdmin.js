@@ -23,6 +23,10 @@ export default function NavbarLinksAdmin() {
   const borderColor = useColorModeValue('#E6ECFA', 'rgba(135, 140, 189, 0.3)');
 
   const handleLogout = () => {
+    // Supprimer le token
+    localStorage.removeItem('token');
+
+    // Rediriger vers la page de connexion
     navigate('/auth/sign-in');
   };
 
